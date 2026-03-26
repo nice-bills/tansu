@@ -14,6 +14,8 @@ const NavbarSearch = () => {
   const [originalUrl, setOriginalUrl] = useState("");
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const publicKeyFromStore = useStore(connectedPublicKey);
+  const isWalletConnected = !!publicKeyFromStore;
 
   const walletKey = useStore(connectedPublicKey);
   const isWalletConnected = !!walletKey;
