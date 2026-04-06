@@ -27,7 +27,12 @@ export async function pinToFilebase(cid: string): Promise<PinResult> {
   const apiKey = import.meta.env.FILEBASE_API_KEY;
   if (!apiKey) {
     console.warn("[DualPin] FILEBASE_API_KEY not set, skipping Filebase pin");
-    return { cid, pinned: false, provider: "filebase", error: "API key not configured" };
+    return {
+      cid,
+      pinned: false,
+      provider: "filebase",
+      error: "API key not configured",
+    };
   }
 
   try {
@@ -51,7 +56,12 @@ export async function pinToFilebase(cid: string): Promise<PinResult> {
 
     const text = await res.text();
     console.warn(`[DualPin] Filebase pin failed: ${res.status} ${text}`);
-    return { cid, pinned: false, provider: "filebase", error: `HTTP ${res.status}` };
+    return {
+      cid,
+      pinned: false,
+      provider: "filebase",
+      error: `HTTP ${res.status}`,
+    };
   } catch (err: any) {
     console.warn(`[DualPin] Filebase pin error: ${err.message}`);
     return { cid, pinned: false, provider: "filebase", error: err.message };
