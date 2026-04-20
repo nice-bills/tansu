@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import Markdown from "markdown-to-jsx";
 import DOMPurify from "dompurify";
 
-import "github-markdown-css";
-
 type LegalView = "summary" | "fullTerms" | "privacy";
 
 interface TermsAcceptanceModalProps {

@@ -149,10 +149,10 @@ Automatic Netlify branch deploy sources:
 Locally we can test using the Netlify CLI:
 
 1. Link the local `dapp/` folder to the target Netlify project:
-    - Staging: `bunx netlify link --id b637f4df-4886-4cc7-bc3b-6bfa12e6f351`
-    - Production: `bunx netlify link --id 12f7130e-323b-42d5-b2cb-69df80676a79`
-2. Verify the active target: `bunx netlify status`
-3. Deploy: `bunx netlify deploy --prod`
+    - Staging: `bun run netlify:link:staging`
+    - Production: `bun run netlify:link:production`
+2. Verify the active target: `bun run netlify:status`
+3. Deploy: `bun run netlify:deploy`
 
 Once on Netlify on production, the dApp can be deployed on IPFS:
 

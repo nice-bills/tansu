@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Markdown from "markdown-to-jsx";
 import DOMPurify from "dompurify";
-import "github-markdown-css";
 
 interface SimpleMarkdownEditorProps {
   value: string;

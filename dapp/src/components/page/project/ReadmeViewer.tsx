@@ -9,8 +9,6 @@ import {
 } from "../../../utils/store";
 import DOMPurify from "dompurify";
 
-import "github-markdown-css";
-
 const ReadmeViewer = () => {
   const isProjectInfoLoaded = useStore(projectInfoLoaded);
   const configData = useStore(configDataStore);

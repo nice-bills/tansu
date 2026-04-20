@@ -21,6 +21,15 @@ const { title, page } = Astro.props;
   global.Buffer = Buffer;
 
   const MODAL_CLASS = "fixed inset-0 z-[9999]";
+  const PRELOAD_RECOVERY_KEY = "tansu_vite_preload_recovery_once";
+
+  // Recover once per tab from missing deploy chunk hashes (stale HTML/client state).
+  window.addEventListener("vite:preloadError", (event) => {
+    event.preventDefault();
+    if (sessionStorage.getItem(PRELOAD_RECOVERY_KEY) === "1") return;
+    sessionStorage.setItem(PRELOAD_RECOVERY_KEY, "1");
+    window.location.reload();
+  });
 
   document.addEventListener("astro:page-load", () => {
     document.addEventListener("show-create-project-modal", async () => {

@@ -12,8 +12,6 @@ import {
   getContractFunctions,
   isValidContractAddress,
 } from "@service/ContractIntrospectionService";
-
-import "github-markdown-css";
 import "react18-json-view/src/style.css";
 
 const OUTCOME_TYPES = ["approved", "rejected", "cancelled"] as const;

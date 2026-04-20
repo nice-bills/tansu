@@ -1,7 +1,6 @@
 // Service Worker for caching static assets
-const CACHE_NAME = "tansu-v1";
+const CACHE_NAME = "tansu-v2";
 const STATIC_ASSETS = [
-  "/",
   "/logo.svg",
   "/manifest.json",
   // Add more critical assets here
@@ -64,32 +63,6 @@ self.addEventListener("fetch", (event) => {
           return response;
         });
       }),
-    );
-  } else if (
-    event.request.destination === "script" ||
-    event.request.destination === "style"
-  ) {
-    // JS/CSS: Network first, then cache
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          if (response.status === 200) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseClone).catch((error) => {
-                console.warn(
-                  "Failed to cache resource:",
-                  event.request.url,
-                  error,
-                );
-              });
-            });
-          }
-          return response;
-        })
-        .catch(() => {
-          return caches.match(event.request);
-        }),
     );
   }
 });

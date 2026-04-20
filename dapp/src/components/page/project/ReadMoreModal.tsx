@@ -3,7 +3,6 @@ import type { FC } from "react";
 import Modal from "components/utils/Modal";
 import { fetchReadmeContentFromConfigUrl } from "../../../service/GithubService";
 import Markdown from "markdown-to-jsx";
-import "github-markdown-css";
 
 import CopyButton from "components/utils/CopyButton";
 

@@ -1,5 +1,5 @@
 [build]
-  # This file lives in dapp/, so build from the current directory.
+  # This file is in dapp/, so build relative to this directory.
   base = "."
   command = "bun run build"
   publish = "dist"
