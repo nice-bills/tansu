@@ -30,6 +30,7 @@ const ProposalTitle: React.FC<Props> = ({
   const [showVerifyModal, setShowVerifyModal] = useState(false);
   const [showMemberProfile, setShowMemberProfile] = useState(false);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
+  const [isLoadingProfile, setIsLoadingProfile] = useState(false);
 
   const openVotingResultModal = () => {
     if (proposal?.status == "active") {
@@ -43,10 +44,17 @@ const ProposalTitle: React.FC<Props> = ({
   };
 
   const openMemberProfile = async () => {
-    if (proposal?.proposer) {
+    if (!proposal?.proposer) return;
+
+    setIsLoadingProfile(true);
+    try {
       const member = await getMember(proposal.proposer);
       setSelectedMember(member);
       setShowMemberProfile(true);
+    } catch {
+      toast.error("Member Profile", "Failed to load member profile");
+    } finally {
+      setIsLoadingProfile(false);
     }
   };
 
@@ -83,12 +91,19 @@ const ProposalTitle: React.FC<Props> = ({
               <p className="leading-4 text-base text-[#695A77]">Created by</p>
               <div className="flex items-center gap-2">
                 <p
-                  className="leading-4 text-base font-semibold text-primary font-mono cursor-pointer hover:underline"
-                  onClick={openMemberProfile}
+                  className={`leading-4 text-base font-semibold text-primary font-mono ${
+                    isLoadingProfile
+                      ? "opacity-50 cursor-wait"
+                      : "cursor-pointer hover:underline"
+                  }`}
+                  onClick={isLoadingProfile ? undefined : openMemberProfile}
                 >
                   {proposal?.proposer
                     ? truncateMiddle(proposal.proposer, 20)
                     : ""}
+                  {isLoadingProfile && (
+                    <span className="ml-2 inline-block w-3 h-3 border-2 border-[#311255] border-t-transparent rounded-full animate-spin" />
+                  )}
                 </p>
               </div>
             </div>
